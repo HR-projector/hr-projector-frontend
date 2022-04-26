@@ -1,0 +1,39 @@
+.background {
+    background-color: #CAECF5;
+    height: 100vh;
+    padding: 50px;
+    overflow: auto;
+}
+
+.form {
+    background-color: white;
+    min-height: 90%;
+    width: 60%;
+    margin: 0 auto;
+    border-radius: 4%;
+    padding: 4%;
+}
+
+h1 {
+    padding: 2%;
+    text-align: center;
+}
+
+.title {
+    font-size: 3vw;
+}
+
+.logo {
+    padding: 20%;
+    display: flex;
+    justify-content: center;
+}
+
+.submit {
+    margin-right: 4%;
+    min-width: 70%;
+}
+
+.reset {
+    min-width: 70%;
+}
