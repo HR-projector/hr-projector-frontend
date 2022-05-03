@@ -1,5 +1,6 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
+import {login} from "./requests";
 import TextField from '../Registration/TextField';
 import '../Registration/RegForm.css'
 import * as Yup from 'yup';
@@ -13,6 +14,7 @@ function LoginForm() {
             .min(6, 'Пароль должен состоять минимум из 6 символов')
             .required('Необходимо заполнить')
     })
+
     return (
         <Formik
             initialValues={{
@@ -21,7 +23,8 @@ function LoginForm() {
             }}
             validationSchema={validate}
             onSubmit={values => {
-                console.log(values)
+                console.log(values);
+                login(values.email,values.password);
             }}
         >
             {() => (
