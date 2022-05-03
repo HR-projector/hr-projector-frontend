@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import TextField from './TextField';
+import {register} from "../HomePage/requests";
 import './RegForm.css'
 import * as Yup from 'yup';
 
@@ -12,7 +13,7 @@ function RegForm() {
         lastName: Yup.string()
             .max(20, 'Максимум 20 символов')
             .required('Необходимо заполнить'),
-        middleName: Yup.string()
+        patronymic: Yup.string()
             .max(20, 'Максимум 30 символов')
             .required('Необходимо заполнить'),
         email: Yup.string()
@@ -30,13 +31,16 @@ function RegForm() {
             initialValues={{
                 firstName: '',
                 lastName: '',
+                patronymic: '',
                 email: '',
                 password: '',
                 confirmPassword: ''
             }}
             validationSchema={validate}
             onSubmit={values => {
-                console.log(values)
+                console.log(values);
+                register(values.email,values.password,values.confirmPassword,
+                        values.firstName,values.lastName,values.patronymic)
             }}
         >
             {() => (
@@ -45,7 +49,7 @@ function RegForm() {
                     <Form>
                         <TextField label="Имя" name="firstName" type="text" />
                         <TextField label="Фамилия" name="lastName" type="text" />
-                        <TextField label="Отчество" name="middleName" type="text" />
+                        <TextField label="Отчество" name="patronymic" type="text" />
                         <TextField label="Почта" name="email" type="email" />
                         <TextField label="Пароль" name="password" type="password" />
                         <TextField label="Подтверждение пароля" name="confirmPassword" type="password" />
