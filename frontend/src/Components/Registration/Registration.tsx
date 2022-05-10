@@ -1,5 +1,5 @@
 import React from 'react';
-import '../HomePage/Home.css';
+import '../Login/Login.css';
 import logo from "../../Images/logo.png"
 import RegForm from './RegForm'
 

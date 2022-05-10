@@ -1,0 +1,13 @@
+.resume_form {
+    background-color: white;
+    min-height: 80%;
+    width: 90%;
+    margin: 10px auto;
+    border-radius: 10px;
+    padding: 0 4%;
+}
+
+.textarea-style {
+    resize: none;
+    height: 256px;
+}

@@ -1,9 +1,9 @@
 import React from 'react';
-import './Home.css';
+import './Login.css';
 import logo from "../../Images/logo.png";
 import LoginForm from "./LoginForm";
 
-function Home() {
+function Login() {
 
     return (
         <div className={"background"}>
@@ -25,4 +25,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default Login;

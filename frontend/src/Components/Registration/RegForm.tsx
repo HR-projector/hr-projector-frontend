@@ -1,9 +1,10 @@
 import React from 'react';
-import { Formik, Form } from 'formik';
+import { Formik, Form} from 'formik';
 import TextField from './TextField';
-import {register} from "../HomePage/requests";
+import DepartmentOption from "./DepartmentOption";
 import './RegForm.css'
 import * as Yup from 'yup';
+import {useNavigate} from "react-router-dom";
 
 function RegForm() {
     const validate = Yup.object({
@@ -19,6 +20,8 @@ function RegForm() {
         email: Yup.string()
             .email('Почты не сущетсвует')
             .required('Необходимо заполнить почту'),
+        departmentOption: Yup.string()
+            .required('Необходимо выбрать департамент'),
         password: Yup.string()
             .min(6, 'Пароль должен состоять минимум из 6 символов')
             .required('Необходимо заполнить'),
@@ -26,6 +29,51 @@ function RegForm() {
             .oneOf([Yup.ref('password'), null], 'Пароли не совпадают')
             .required('Необходимо подтвердить пароль'),
     })
+
+    const navigate = useNavigate();
+
+    function RouteToLogin() {
+        navigate("/login");
+    }
+
+    async function register(email:string,password:string,password_confirmation:string,
+                            first_name:string,last_name:string,patronymic:string,departmentOption:string) {
+        let body = {
+            jsonrpc: "2.0",
+            id: 0,
+            method: "register",
+            params: {
+                user_data: {
+                    email: email,
+                    password: password,
+                    password_confirmation: password_confirmation,
+                    first_name: first_name,
+                    last_name: last_name,
+                    patronymic: patronymic,
+                    department_id: departmentOption
+                }
+            }
+        }
+
+        let response = await fetch('http://localhost:8000/api/v1/auth/jsonrpc/register', {
+            method: 'POST',
+            body: JSON.stringify(body)
+        });
+        response.json().then(res => {
+            if (res.hasOwnProperty("error")) {
+                if (res.error.code === 1001) {
+                    alert(`Ошибка ${res.error.code}, Пользователь уже сущетсвует`)
+                }
+                else if (res.error.code === 2001) {
+                    alert(`Ошибка ${res.error.code}, Департамент не найден`)
+                }
+            }
+            else {
+                RouteToLogin()
+            }
+        })
+    }
+
     return (
         <Formik
             initialValues={{
@@ -34,13 +82,14 @@ function RegForm() {
                 patronymic: '',
                 email: '',
                 password: '',
-                confirmPassword: ''
+                confirmPassword: '',
+                departmentOption : ''
             }}
             validationSchema={validate}
             onSubmit={values => {
                 console.log(values);
                 register(values.email,values.password,values.confirmPassword,
-                        values.firstName,values.lastName,values.patronymic)
+                        values.firstName,values.lastName,values.patronymic,values.departmentOption)
             }}
         >
             {() => (
@@ -53,6 +102,7 @@ function RegForm() {
                         <TextField label="Почта" name="email" type="email" />
                         <TextField label="Пароль" name="password" type="password" />
                         <TextField label="Подтверждение пароля" name="confirmPassword" type="password" />
+                        <DepartmentOption label="Выбор департамента" name="departmentOption" />
                         <div className={"buttons"}>
                             <button className="btn btn-success mt-3 submit" type="submit">Подтвердить</button>
                             <button className="btn btn-danger mt-3 ml-3 reset" type="reset">Сбросить</button>

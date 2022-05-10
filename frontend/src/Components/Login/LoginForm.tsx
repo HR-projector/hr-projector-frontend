@@ -1,9 +1,9 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import {login} from "./requests";
 import TextField from '../Registration/TextField';
 import '../Registration/RegForm.css'
 import * as Yup from 'yup';
+import {useNavigate} from "react-router-dom"
 
 function LoginForm() {
     const validate = Yup.object({
@@ -14,6 +14,43 @@ function LoginForm() {
             .min(6, 'Пароль должен состоять минимум из 6 символов')
             .required('Необходимо заполнить')
     })
+
+    const navigate = useNavigate();
+
+    function RouteToResume() {
+        navigate("/resume");
+    }
+
+    async function login(email:string,password:string) {
+        let body = {
+            jsonrpc: "2.0",
+            id: 0,
+            method: "login",
+            params: {
+                credentials: {
+                    email: email,
+                    password: password
+                }
+            }
+        }
+
+        let response = await fetch('http://localhost:8000/api/v1/auth/jsonrpc/login', {
+            method: 'POST',
+            body: JSON.stringify(body)
+        });
+        response.json().then(res => {
+            if (res.hasOwnProperty("error")) {
+                alert(`Ошибка ${res.error.code}, авторизация не произведена, проверьте логин и пароль`)
+            }
+            else {
+                alert(`Авторизация пройдена`);
+                console.log(res.result.token)
+                localStorage.setItem("token",res.result.token)
+                RouteToResume()
+            }
+        })
+
+    }
 
     return (
         <Formik

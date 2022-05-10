@@ -1,0 +1,15 @@
+.card-resume {
+    min-height: 100px;
+    background-color: white;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.add-btn {
+    margin: 10px;
+}
+
+.resume-text {
+    word-break: break-all;
+}
