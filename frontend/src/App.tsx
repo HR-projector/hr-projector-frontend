@@ -1,8 +1,10 @@
 import React, {Component} from "react";
 import {Route, Routes, BrowserRouter as Router} from "react-router-dom";
-import Home from "./Components/HomePage/Home";
+import Login from "./Components/Login/Login";
 import Registration from "./Components/Registration/Registration";
+import Resume from "./Components/Applicant/Resume"
 import './App.css';
+import ResumeForm from "./Components/Applicant/ResumeForm";
 
 
 class App extends Component{
@@ -11,8 +13,10 @@ class App extends Component{
         return (
             <Router>
                 <Routes>
-                    <Route path="/" element={<Home/>} />
+                    <Route path="/login" element={<Login/>} />
                     <Route path="/reg" element={<Registration/>} />
+                    <Route path="/resume" element={<Resume/>} />
+                    <Route path="/resume/add_resume" element={<ResumeForm/>} />
                 </Routes>
             </Router>
         );
