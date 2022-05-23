@@ -10,7 +10,8 @@ function ResumeTextField({ label, ...props}:any){
                 className={`form-control shadow-none textarea-style ${meta.touched && meta.error && 'is-invalid'}`}
                 {...field} {...props}
                 autoComplete="off"
-            />
+            >
+            </textarea>
             <ErrorMessage component="div" name={field.name} className="error" />
         </div>
     )

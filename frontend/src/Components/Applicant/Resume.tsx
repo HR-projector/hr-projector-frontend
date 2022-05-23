@@ -45,7 +45,7 @@ function Resume() {
             </a>
             {state.resumes.map(resume => {
                 return (
-                    <ResumeCard content={resume.content} created_at={resume.created_at} />
+                    <ResumeCard content={resume.content} created_at={resume.created_at} id={resume.id} state={resume.state}/>
                 )
             })}
         </div>
