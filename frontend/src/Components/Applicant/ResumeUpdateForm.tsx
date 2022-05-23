@@ -5,8 +5,7 @@ import {Form, Formik} from "formik";
 import * as Yup from "yup";
 import ResumeTextField from "./ResumeTextField";
 
-function ResumeForm() {
-
+function ResumeUpdateForm() {
 
     const validate = Yup.object({
         resumeText: Yup.string()
@@ -14,17 +13,18 @@ function ResumeForm() {
             .required('Необходимо заполнить резюме'),
     })
 
-    async function addResume(resumeText:string) {
+    async function updateResume(resumeText:string) {
         let body = {
             jsonrpc: "2.0",
             id: 0,
-            method: "create_resume",
+            method: "update_resume",
             params: {
-                content: resumeText
+                id: localStorage.getItem('id'),
+                new_content: resumeText
             }
         }
 
-        let response = await fetch('http://localhost:8000/api/v1/web/jsonrpc/create_resume', {
+        let response = await fetch('http://localhost:8000/api/v1/web/jsonrpc/update_resume', {
             method: 'POST',
             headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`},
             body: JSON.stringify(body)
@@ -48,16 +48,16 @@ function ResumeForm() {
                         validationSchema={validate}
                         onSubmit={values => {
                             console.log(values);
-                            addResume(values.resumeText);
+                            updateResume(values.resumeText);
                         }}
                     >
                         {() => (
                             <div>
-                                <h1 className="font-weight-bold title">Создание резюме</h1>
+                                <h1 className="font-weight-bold title">Редактирование резюме</h1>
                                 <Form>
-                                    <ResumeTextField label="Текст резюме" name="resumeText" type="text" />
+                                    <ResumeTextField label="Текст резюме" name="resumeText" type="text"/>
                                     <div className={"buttons"}>
-                                        <button className="btn btn-success mt-3" type="submit">Создать</button>
+                                        <button className="btn btn-success mt-3" type="submit">Обновить</button>
                                     </div>
                                 </Form>
                             </div>
@@ -70,4 +70,4 @@ function ResumeForm() {
     )
 }
 
-export default ResumeForm
+export default ResumeUpdateForm

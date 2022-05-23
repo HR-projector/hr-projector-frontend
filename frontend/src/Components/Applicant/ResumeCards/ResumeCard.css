@@ -13,3 +13,18 @@
 .resume-text {
     word-break: break-all;
 }
+
+.resume-btn {
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.publish {
+
+}
+
+.card-buttons {
+    display: flex;
+}
