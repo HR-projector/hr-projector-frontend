@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import '../Applicant/Resume.css'
 import General from "../General/General";
-import ResumeCard from "./ResumeCards/ResumeCard";
+import ResumeCard from "./Cards/Card";
 
 function Resume() {
     const [state, setState] = useState({

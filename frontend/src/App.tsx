@@ -6,6 +6,9 @@ import Resume from "./Components/Applicant/Resume"
 import './App.css';
 import ResumeForm from "./Components/Applicant/ResumeForm";
 import ResumeUpdateForm from "./Components/Applicant/ResumeUpdateForm";
+import Vacancy from "./Components/Manager/Vacancy";
+import VacancyForm from "./Components/Manager/VacancyForm";
+import VacancyUpdateForm from "./Components/Manager/VacancyUpdateForm";
 
 
 class App extends Component{
@@ -19,6 +22,9 @@ class App extends Component{
                     <Route path="/resume" element={<Resume/>} />
                     <Route path="/resume/add_resume" element={<ResumeForm/>} />
                     <Route path="/resume/update_resume" element={<ResumeUpdateForm/>} />
+                    <Route path="/vacancy" element={<Vacancy/>} />
+                    <Route path="/vacancy/add_vacancy" element={<VacancyForm/>} />
+                    <Route path="/vacancy/update_vacancy" element={<VacancyUpdateForm/>} />
                 </Routes>
             </Router>
         );

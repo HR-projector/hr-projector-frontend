@@ -1,23 +1,23 @@
 import React, {useState} from "react";
-import './ResumeCard.css';
+import '../../Applicant/Cards/Card.css';
 import publish from "../../../Images/done.png";
 import update from "../../../Images/update.png";
 import hide from "../../../Images/hide.png";
 import {useNavigate} from "react-router-dom"
 
-function ResumeCard(props:any) {
+function VacancyCard(props:any) {
 
-    async function publishResume() {
+    async function publishVacancy() {
         let body = {
             jsonrpc: "2.0",
             id: 0,
-            method: "publish_resume",
+            method: "publish_vacancy",
             params: {
                 id: props.id
             }
         }
 
-        let response = await fetch('http://localhost:8000/api/v1/web/jsonrpc/publish_resume', {
+        let response = await fetch('http://localhost:8000/api/v1/web/jsonrpc/publish_vacancy', {
             method: 'POST',
             headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`},
             body: JSON.stringify(body)
@@ -28,7 +28,7 @@ function ResumeCard(props:any) {
 
     }
 
-    async function hideResume() {
+    async function hideVacancy() {
         let body = {
             jsonrpc: "2.0",
             id: 0,
@@ -38,7 +38,7 @@ function ResumeCard(props:any) {
             }
         }
 
-        let response = await fetch('http://localhost:8000/api/v1/web/jsonrpc/hide_resume', {
+        let response = await fetch('http://localhost:8000/api/v1/web/jsonrpc/hide_vacancy', {
             method: 'POST',
             headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`},
             body: JSON.stringify(body)
@@ -52,7 +52,7 @@ function ResumeCard(props:any) {
     const navigate = useNavigate();
 
     function RouteToUpdate() {
-        navigate("/resume/update_resume");
+        navigate("/vacancy/update_vacancy");
         localStorage.setItem("id", props.id);
         localStorage.setItem("content",props.content)
     }
@@ -65,21 +65,20 @@ function ResumeCard(props:any) {
     return(
         <div className='card-resume'>
             <p>Статус: {props.state === "DRAFT" ? 'Добавлено' : props.state === "PUBLISHED" ? 'Опубликовано' : 'Скрыто'}</p>
-            <p>Создано: {addLeadZero(new Date(props.created_at).getDate())}-
-                {addLeadZero(new Date(props.created_at).getMonth()+1)}-
-                {addLeadZero(new Date(props.created_at).getFullYear())}</p>
-            <p>Контент:</p>
+            <p>Создатель: {props.creator_full_name}</p>
+            <p>Позиция разработчика: {props.position}</p>
+            <p>Необходимый опыт: {props.experience} (лет)</p>
             <p className="resume-text">{props.content}</p>
             {props.state === "PUBLISHED" &&
             <div className={"card-buttons"}>
-                <div onClick={hideResume}>
+                <div onClick={hideVacancy}>
                     <img className={"resume-btn"} src={hide}/>
                 </div>
             </div>
             }
             {(props.state === "DRAFT" || props.state === "HIDDEN") &&
             <div className={"card-buttons"}>
-                <div onClick={publishResume}>
+                <div onClick={publishVacancy}>
                     <img className={"resume-btn"} src={publish}/>
                 </div>
                 <div onClick={RouteToUpdate}>
@@ -91,4 +90,4 @@ function ResumeCard(props:any) {
     )
 }
 
-export default ResumeCard
+export default VacancyCard

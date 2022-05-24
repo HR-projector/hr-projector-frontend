@@ -17,6 +17,12 @@ function CustomNavbar() {
                 <li className="nav-item">
                     <a className="nav-link" href="#">Поиск вакансий</a>
                 </li>
+                <li className="nav-item">
+                    <a className="nav-link" href="/vacancy">Мои вакансии</a>
+                </li>
+                <li className="nav-item">
+                    <a className="nav-link" href="#">Список резюме</a>
+                </li>
             </ul>
         </div>
     </nav>
