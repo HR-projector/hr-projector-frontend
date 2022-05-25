@@ -17,8 +17,13 @@ function LoginForm() {
 
     const navigate = useNavigate();
 
-    function RouteToResume() {
-        navigate("/resume");
+    function RouteTo(role:string) {
+        if (role === 'APPLICANT') {
+            navigate("/resume");
+        }
+        else {
+            navigate("/vacancy")
+        }
     }
 
     async function login(email:string,password:string) {
@@ -34,7 +39,7 @@ function LoginForm() {
             }
         }
 
-        let response = await fetch('http://localhost:8000/api/v1/auth/jsonrpc/login', {
+        let response = await fetch('http://localhost:8000/api/v1/web/jsonrpc/login', {
             method: 'POST',
             body: JSON.stringify(body)
         });
@@ -46,10 +51,35 @@ function LoginForm() {
                 alert(`Авторизация пройдена`);
                 console.log(res.result.token)
                 localStorage.setItem("token",res.result.token)
-                RouteToResume()
             }
+        }).then(() => {
+            getCurrentUser();
         })
 
+    }
+
+    async function getCurrentUser() {
+        let body = {
+            jsonrpc: "2.0",
+            id: 0,
+            method: "get_current_user",
+            params: {}
+        }
+
+        let response = await fetch('http://localhost:8000/api/v1/web/jsonrpc/get_current_user', {
+            method: 'POST',
+            headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`},
+            body: JSON.stringify(body),
+        });
+        response.json().then(res => {
+            if (res.hasOwnProperty("error")) {
+                alert(`Ошибка ${res.error.code}, ошибка получения пользователя`)
+            }
+            else {
+                localStorage.setItem("user",JSON.stringify(res.result));
+                RouteTo(res.result.role)
+            }
+        })
     }
 
     return (
@@ -75,7 +105,7 @@ function LoginForm() {
                         </div>
                     </Form>
                     <a href={"/reg"}>
-                        <button className="btn btn-danger mt-3 ml-3 reset">
+                        <button className="btn btn-danger mt-3 ml-3 reg">
                             Зарегистрироваться
                         </button>
                     </a>

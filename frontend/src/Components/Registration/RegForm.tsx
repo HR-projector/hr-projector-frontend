@@ -55,7 +55,7 @@ function RegForm() {
             }
         }
 
-        let response = await fetch('http://localhost:8000/api/v1/auth/jsonrpc/register', {
+        let response = await fetch('http://localhost:8000/api/v1/web/jsonrpc/register', {
             method: 'POST',
             body: JSON.stringify(body)
         });
