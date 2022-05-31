@@ -18,10 +18,6 @@ function CustomNavbar() {
     }
 
     const user:User = JSON.parse(localStorage.getItem('user') as string);
-    const roles = {
-        'APPLICANT': 'Соискатель',
-        'MANAGER': 'Менеджер',
-    }
 
     function get_role(role:string) {
         return role === 'APPLICANT' ? 'Соискатель' : 'Менеджер'
@@ -39,7 +35,7 @@ function CustomNavbar() {
                     <a className="nav-link" href="/resume">Моё резюме</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Поиск вакансий</a>
+                    <a className="nav-link" href="/vacancy/search_vacancy">Поиск вакансий</a>
                 </li>
             </ul>
             }
@@ -49,7 +45,7 @@ function CustomNavbar() {
                     <a className="nav-link" href="/vacancy">Мои вакансии</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Список резюме</a>
+                    <a className="nav-link" href="/resume/search_resume">Список резюме</a>
                 </li>
             </ul>
             }

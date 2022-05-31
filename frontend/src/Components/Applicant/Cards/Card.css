@@ -28,3 +28,7 @@
 .card-buttons {
     display: flex;
 }
+
+.btn-width {
+    width: 20%;
+}
