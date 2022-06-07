@@ -65,11 +65,21 @@ function Card(props:any) {
     return(
         <div className='card-resume'>
             <p>Статус: {props.state === "DRAFT" ? 'Добавлено' : props.state === "PUBLISHED" ? 'Опубликовано' : 'Скрыто'}</p>
-            <p>Создано: {addLeadZero(new Date(props.created_at).getDate())}-
-                {addLeadZero(new Date(props.created_at).getMonth()+1)}-
-                {addLeadZero(new Date(props.created_at).getFullYear())}</p>
-            <p>Контент:</p>
-            <p className="resume-text">{props.content}</p>
+            <p>Опубликовано: {addLeadZero(new Date(props.published_at).getDate())}-
+                {addLeadZero(new Date(props.published_at).getMonth()+1)}-
+                {addLeadZero(new Date(props.published_at).getFullYear())}</p>
+            <h4>Контент:</h4>
+            <p className="resume-text">Текущая позиция: {props.current_position}</p>
+            <p className="resume-text">Желаемая позиция: {props.desired_position}</p>
+            <p>Скил позиция</p>
+            {props.skills.map((skill:string) => {
+                return (
+                    <p>- {skill}</p>
+                )
+            })}
+            <p className="resume-text">Опытная позиция {props.experience} (год/лет)</p>
+            <p>Биографическая позиция</p>
+            <p className="resume-text">{props.bio}</p>
             {props.state === "PUBLISHED" &&
             <div className={"card-buttons"}>
                 <div onClick={hideResume}>

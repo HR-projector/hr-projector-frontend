@@ -7,9 +7,15 @@ function Resume() {
         resumes:[{
             id: 0,
             state: "DRAFT",
-            content: "string",
-            created_at: "2022-05-10T10:32:37.018Z",
-            published_at: "2022-05-10T10:32:37.018Z"
+            current_position: "string",
+            desired_position: "string",
+            skills: [
+                "string"
+            ],
+            experience: 0,
+            bio: "string",
+            created_at: "2022-06-07T17:23:06.981Z",
+            published_at: "2022-06-07T17:23:06.981Z"
         }],
     });
 
@@ -43,7 +49,10 @@ function Resume() {
             </a>
             {state.resumes.map(resume => {
                 return (
-                    <ResumeCard content={resume.content} created_at={resume.created_at} id={resume.id} state={resume.state}/>
+                    <ResumeCard current_position={resume.current_position} desired_position={resume.desired_position}
+                                skills={resume.skills} experience={resume.experience}
+                                bio={resume.bio} published_at={resume.published_at}
+                                id={resume.id} state={resume.state}/>
                 )
             })}
         </div>

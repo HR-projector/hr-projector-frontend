@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useCallback, useEffect} from "react";
 import './ResumeForm.css';
 import {Form, Formik} from "formik";
 import * as Yup from "yup";
@@ -8,23 +8,21 @@ import SelectField from "../General/SelectField";
 
 function ResumeForm() {
 
-
-    const validate = Yup.object({
-        current_position: Yup.string()
-            .min(20, 'Минимум 20 символов')
-            .required('Необходимо указать вашу текущую позицию'),
-        desired_position: Yup.string()
-            .min(20, 'Минимум 20 символов')
-            .required('Необходимо указать вашу желаемую позицию'),
-        // skills: Yup.array()
-        //     .min(2, 'минимум гавно?')
-        //     .required('Необходимо указать ваши навыки'),
-        experience: Yup.number()
-            .required('Необходимо указать ваш стаж'),
-        bio: Yup.string()
-            .min(20, 'Минимум 20 символов')
-            .required('Необходимо указать вашу биографию'),
-    })
+    // const validate = Yup.object({
+    //     current_position: Yup.string()
+    //         .min(20, 'Минимум 20 символов')
+    //         .required('Необходимо указать вашу текущую позицию'),
+    //     desired_position: Yup.string()
+    //         .min(20, 'Минимум 20 символов')
+    //         .required('Необходимо указать вашу желаемую позицию'),
+    //     // skills: Yup.array()
+    //     //     .required('Необходимо указать ваши навыки'),
+    //     experience: Yup.number()
+    //         .required('Необходимо указать ваш стаж'),
+    //     bio: Yup.string()
+    //         .min(20, 'Минимум 20 символов')
+    //         .required('Необходимо указать вашу биографию'),
+    // })
 
     async function addResume(current_position:string, desired_position:string,
                              skills:string[], experience:number, bio:string)
@@ -65,12 +63,12 @@ function ResumeForm() {
                             current_position: "",
                             desired_position: "",
                             skills: [
-                                "бекенд","анал","фембой"
+                                "бекенд","фронтенд","аналитик"
                             ],
                             experience: 0,
                             bio: ""
                         }}
-                        validationSchema={validate}
+                        // validationSchema={validate}
                         onSubmit={values => {
                             console.log(values);
                             addResume(values.current_position, values.desired_position,
@@ -83,7 +81,7 @@ function ResumeForm() {
                                 <Form>
                                     <TextField label="Текущая позиция" name="current_position" type="text" />
                                     <TextField label="Желаемая позиция" name="resumeText" type="text" />
-                                    {/*<TextField label="Рабочие навыки" name="skills" type="array" />*/}
+                                    <TextField label="Рабочие навыки" name="skills" type="array" />
                                     <TextField label="Опыт (в годах)" name="experience" type="number" />
                                     <ResumeTextField label="Биография" name="bio" type="text" />
                                     <div className={"buttons"}>
