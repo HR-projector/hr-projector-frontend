@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Route, Routes, BrowserRouter as Router} from "react-router-dom";
+import {Route, Routes ,Link} from "react-router-dom";
 import Login from "./Components/Login/Login";
 import Registration from "./Components/Registration/Registration";
 import Resume from "./Components/Applicant/Resume"
@@ -11,15 +11,17 @@ import VacancyForm from "./Components/Manager/VacancyForm";
 import VacancyUpdateForm from "./Components/Manager/VacancyUpdateForm";
 import VacancySearch from "./Components/Applicant/VacancySearch";
 import ResumeSearch from "./Components/Manager/ResumeSearch";
+import CustomNavbar from "./Components/General/CustomNavbar";
 
 
 class App extends Component{
     render() {
 
         return (
-            <Router>
+            <div>
+                <CustomNavbar/>
                 <Routes>
-                    <Route path="/login" element={<Login/>} />
+                    <Route path="/" element={<Login/>} />
                     <Route path="/reg" element={<Registration/>} />
                     <Route path="/resume" element={<Resume/>} />
                     <Route path="/resume/add_resume" element={<ResumeForm/>} />
@@ -30,7 +32,7 @@ class App extends Component{
                     <Route path="/vacancy/update_vacancy" element={<VacancyUpdateForm/>} />
                     <Route path="/vacancy/search_vacancy" element={<VacancySearch/>} />
                 </Routes>
-            </Router>
+            </div>
         );
     }
 }

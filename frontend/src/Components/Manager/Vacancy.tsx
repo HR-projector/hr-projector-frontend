@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import '../Applicant/Resume.css'
-import General from "../General/General";
 import VacancyCard from "./Cards/VacancyCard";
 
 function Vacancy() {
@@ -42,7 +41,6 @@ function Vacancy() {
 
     return (
         <div className={"general_background"}>
-            <General />
             <a href="/vacancy/add_vacancy">
                 <button className="btn btn-success mt-3 add-btn" >Добавить Вакансию</button>
             </a>

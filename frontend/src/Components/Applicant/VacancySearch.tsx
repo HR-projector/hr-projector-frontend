@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import '../Applicant/Resume.css'
-import General from "../General/General";
 import SearchCard from "./Cards/SearchCard";
 
 function VacancySearch() {
@@ -43,7 +42,6 @@ function VacancySearch() {
 
     return (
         <div className={"general_background"}>
-            <General />
             {state.vacancies.map(vacancy => {
                 return (
                     <SearchCard creator_full_name={vacancy.creator_full_name} experience={vacancy.experience}

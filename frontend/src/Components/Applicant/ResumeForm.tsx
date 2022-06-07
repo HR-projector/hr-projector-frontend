@@ -1,4 +1,3 @@
-import General from "../General/General";
 import React from "react";
 import './ResumeForm.css';
 import {Form, Formik} from "formik";
@@ -37,7 +36,6 @@ function ResumeForm() {
 
     return(
         <div className="general_background">
-        <General />
         <div className={"resume_form"}>
             <div className="container mt-3">
                 <div >

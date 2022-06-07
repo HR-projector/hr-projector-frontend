@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import '../Applicant/Resume.css'
-import General from "../General/General";
 import ResumeCard from "./Cards/Card";
 
 function Resume() {
@@ -39,7 +38,6 @@ function Resume() {
 
     return(
         <div className={"general_background"}>
-            <General />
             <a href="/resume/add_resume">
                 <button className="btn btn-success mt-3 add-btn" >Добавить резюме</button>
             </a>
