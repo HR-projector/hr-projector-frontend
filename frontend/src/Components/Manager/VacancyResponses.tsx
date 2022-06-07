@@ -53,11 +53,11 @@ function VacancyResponses() {
         let body = {
             jsonrpc: "2.0",
             id: 0,
-            method: "get_resumes_for_manager",
+            method: "get_vacancy_responses_for_manager",
             params: {}
         }
 
-        let response = await fetch('http://localhost:8000/api/v1/web/jsonrpc/get_resumes_for_manager', {
+        let response = await fetch('http://localhost:8000/api/v1/web/jsonrpc/get_vacancy_responses_for_manager', {
             method: 'POST',
             headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`},
             body: JSON.stringify(body)

@@ -9,25 +9,6 @@ function SearchCard(props:any) {
         return val;
     }
 
-    async function respondToVacancy() {
-        let body = {
-            jsonrpc: "2.0",
-            id: 0,
-            method: "respond_vacancy",
-            params: {
-                vacancy_id: props.vacancy_id,
-                resume_id: localStorage.getItem("response_id"),
-                message: "string"
-            }
-        }
-
-        let response = await fetch('http://localhost:8000/api/v1/web/jsonrpc/respond_vacancy', {
-            method: 'POST',
-            headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`},
-            body: JSON.stringify(body)
-        });
-    }
-
     return(
         <div className='card-resume'>
             <p>Создано: {addLeadZero(new Date(props.published_at).getDate())}-
@@ -37,11 +18,11 @@ function SearchCard(props:any) {
             <p>Департамент: {props.department_name}</p>
             <p>Требуется опыт разработки: {props.experience} (в годах)</p>
             <p>Позиция: {props.experience} (в годах)</p>
-            <button type="button" className="btn btn-success mt-3 submit btn-width"
-                    data-toggle="modal" data-target="#prostoModalka" onClick={respondToVacancy}>
+            <button type="button" className="btn btn-primary"
+                    data-bs-toggle="modal" data-bs-target="#prostoModalka">
                 Откликнуться на вакансию
             </button>
-            <ProstoModalka/>
+            <ProstoModalka vacancy_id={props.vacancy_id}/>
         </div>
     )
 }
