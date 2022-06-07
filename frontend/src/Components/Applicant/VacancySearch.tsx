@@ -46,7 +46,7 @@ function VacancySearch() {
                 return (
                     <SearchCard creator_full_name={vacancy.creator_full_name} experience={vacancy.experience}
                                  position={vacancy.position}  department_name={vacancy.department_name}
-                                published_at={vacancy.published_at}
+                                published_at={vacancy.published_at} vacancy_id={vacancy.id}
                     />
                 )
             })}

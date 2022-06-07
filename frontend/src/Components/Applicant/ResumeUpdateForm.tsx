@@ -3,6 +3,7 @@ import './ResumeForm.css';
 import {Form, Formik} from "formik";
 import * as Yup from "yup";
 import ResumeTextField from "./ResumeTextField";
+import TextField from "../Registration/TextField";
 
 function ResumeUpdateForm() {
 
@@ -12,14 +13,21 @@ function ResumeUpdateForm() {
             .required('Необходимо заполнить резюме'),
     })
 
-    async function updateResume(resumeText:string) {
+    async function updateResume(current_position:string, desired_position:string,
+                                skills:string[], experience:number, bio:string) {
         let body = {
             jsonrpc: "2.0",
             id: 0,
             method: "update_resume",
             params: {
                 id: localStorage.getItem('id'),
-                new_content: resumeText
+                current_position: "",
+                desired_position: "",
+                skills: [
+                    " "
+                ],
+                experience: 0,
+                bio: ""
             }
         }
 
@@ -41,19 +49,30 @@ function ResumeUpdateForm() {
                 <div >
                     <Formik
                         initialValues={{
-                            resumeText: '',
+                            current_position: "",
+                            desired_position: "",
+                            skills: [
+                                "бекенд","фронтенд","аналитик"
+                            ],
+                            experience: 0,
+                            bio: ""
                         }}
                         validationSchema={validate}
                         onSubmit={values => {
                             console.log(values);
-                            updateResume(values.resumeText);
+                            updateResume(values.current_position, values.desired_position,
+                                values.skills, values.experience, values.bio);
                         }}
                     >
                         {() => (
                             <div>
                                 <h1 className="font-weight-bold title">Редактирование резюме</h1>
                                 <Form>
-                                    <ResumeTextField label="Текст резюме" name="resumeText" type="text"/>
+                                    <TextField label="Текущая позиция" name="current_position" type="text" />
+                                    <TextField label="Желаемая позиция" name="resumeText" type="text" />
+                                    <TextField label="Рабочие навыки" name="skills" type="array" />
+                                    <TextField label="Опыт (в годах)" name="experience" type="number" />
+                                    <ResumeTextField label="Биография" name="bio" type="text" />
                                     <div className={"buttons"}>
                                         <button className="btn btn-success mt-3" type="submit">Обновить</button>
                                     </div>
@@ -68,4 +87,4 @@ function ResumeUpdateForm() {
     )
 }
 
-export default ResumeUpdateForm
+export default ResumeUpdateForm ;

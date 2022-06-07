@@ -50,6 +50,9 @@ function CustomNavbar() {
                 <li className="nav-item">
                     <Link className="nav-link" to="/resume/search_resume">Список резюме</Link>
                 </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/vacancy/vacancy_responses">Список откликов на вакансии</Link>
+                </li>
             </ul>
             }
         </div>
