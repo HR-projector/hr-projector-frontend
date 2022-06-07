@@ -85,6 +85,9 @@ function Card(props:any) {
                 <div onClick={hideResume}>
                     <img className={"resume-btn"} src={hide}/>
                 </div>
+                <div onClick={()=>{localStorage.setItem("response_id", props.id)}}>
+                    <button className="btn btn-danger mt-3 ml-3 reg">Добавить в отклик</button>
+                </div>
             </div>
             }
             {(props.state === "DRAFT" || props.state === "HIDDEN") &&

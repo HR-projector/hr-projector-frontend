@@ -12,6 +12,7 @@ import VacancyUpdateForm from "./Components/Manager/VacancyUpdateForm";
 import VacancySearch from "./Components/Applicant/VacancySearch";
 import ResumeSearch from "./Components/Manager/ResumeSearch";
 import CustomNavbar from "./Components/General/CustomNavbar";
+import VacancyResponses from "./Components/Manager/VacancyResponses";
 
 
 class App extends Component{
@@ -31,6 +32,7 @@ class App extends Component{
                     <Route path="/vacancy/add_vacancy" element={<VacancyForm/>} />
                     <Route path="/vacancy/update_vacancy" element={<VacancyUpdateForm/>} />
                     <Route path="/vacancy/search_vacancy" element={<VacancySearch/>} />
+                    <Route path="/vacancy/vacancy_responses" element={<VacancyResponses/>} />
                 </Routes>
             </div>
         );
