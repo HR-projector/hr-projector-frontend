@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import '../Applicant/Resume.css'
-import General from "../General/General";
 import SearchResumeCard from "./Cards/SearchResumeCard";
 
 function ResumeSearch() {
@@ -42,7 +41,6 @@ function ResumeSearch() {
 
     return (
         <div className={"general_background"}>
-            <General />
             {state.resumes.map(resume => {
                 return (
                     <SearchResumeCard email={resume.email} full_name={resume.full_name}

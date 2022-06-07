@@ -1,8 +1,11 @@
-import React, {useEffect} from "react";
+import React from "react";
 import logo from "../../Images/logo.png";
+import {Link} from 'react-router-dom'
 import './General.css'
 
 function CustomNavbar() {
+
+
 
     type User = {
         id:number,
@@ -32,20 +35,20 @@ function CustomNavbar() {
             {user.role === 'APPLICANT' &&
             <ul className="navbar-nav">
                 <li className="nav-item active">
-                    <a className="nav-link" href="/resume">Моё резюме</a>
+                    <Link className="nav-link" to="/resume">Моё резюме</Link>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="/vacancy/search_vacancy">Поиск вакансий</a>
+                    <Link className="nav-link" to="/vacancy/search_vacancy">Поиск вакансий</Link>
                 </li>
             </ul>
             }
             {user.role === 'MANAGER' &&
             <ul className="navbar-nav">
                 <li className="nav-item">
-                    <a className="nav-link" href="/vacancy">Мои вакансии</a>
+                    <Link className="nav-link" to="/vacancy">Мои вакансии</Link>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="/resume/search_resume">Список резюме</a>
+                    <Link className="nav-link" to="/resume/search_resume">Список резюме</Link>
                 </li>
             </ul>
             }
