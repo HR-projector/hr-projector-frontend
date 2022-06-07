@@ -1,5 +1,6 @@
 import React from "react";
 import './Card.css';
+import ProstoModalka from "../ProstoModalka";
 
 function SearchCard(props:any) {
 
@@ -32,11 +33,15 @@ function SearchCard(props:any) {
             <p>Создано: {addLeadZero(new Date(props.published_at).getDate())}-
                 {addLeadZero(new Date(props.published_at).getMonth()+1)}-
                 {addLeadZero(new Date(props.published_at).getFullYear())}</p>
-            <p>Заказчик:{props.creator_full_name}</p>
+            <p>Заказчик: {props.creator_full_name}</p>
             <p>Департамент: {props.department_name}</p>
             <p>Требуется опыт разработки: {props.experience} (в годах)</p>
             <p>Позиция: {props.experience} (в годах)</p>
-            <button className="btn btn-success mt-3 submit btn-width" onClick={respondToVacancy}>Откликнуться на вакансию</button>
+            <button type="button" className="btn btn-success mt-3 submit btn-width"
+                    data-toggle="modal" data-target="#prostoModalka" onClick={respondToVacancy}>
+                Откликнуться на вакансию
+            </button>
+            <ProstoModalka/>
         </div>
     )
 }
