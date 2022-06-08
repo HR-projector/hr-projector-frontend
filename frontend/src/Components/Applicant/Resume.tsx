@@ -1,23 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import '../Applicant/Resume.css'
 import ResumeCard from "./Cards/Card";
+import {IResume} from "../Manager/ResumeSearch";
 
 function Resume() {
-    const [state, setState] = useState({
-        resumes:[{
-            id: 0,
-            state: "DRAFT",
-            current_position: "string",
-            desired_position: "string",
-            skills: [
-                "string"
-            ],
-            experience: 0,
-            bio: "string",
-            created_at: "2022-06-07T17:23:06.981Z",
-            published_at: "2022-06-07T17:23:06.981Z"
-        }],
-    });
+    const [state, setState] = useState<IResume[]>([]);
 
     useEffect(() => {
         getResumes()
@@ -38,7 +25,7 @@ function Resume() {
         });
         response.json().then(
             res => {
-                setState({resumes: res.result})}
+                setState(res.result)}
         )
     }
 
@@ -47,7 +34,7 @@ function Resume() {
             <a href="/resume/add_resume">
                 <button className="btn btn-success mt-3 add-btn" >Добавить резюме</button>
             </a>
-            {state.resumes.map(resume => {
+            {state.map(resume => {
                 return (
                     <ResumeCard current_position={resume.current_position} desired_position={resume.desired_position}
                                 skills={resume.skills} experience={resume.experience}

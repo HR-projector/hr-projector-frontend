@@ -3,22 +3,20 @@ import logo from "../../Images/logo.png";
 import {Link} from 'react-router-dom'
 import './General.css'
 
+interface User {
+    id:number,
+    email: string,
+    first_name: string,
+    last_name: string,
+    patronymic: string,
+    department: {
+        id: number,
+        name: string
+    },
+    role: string
+}
+
 function CustomNavbar() {
-
-
-
-    type User = {
-        id:number,
-        email: string,
-        first_name: string,
-        last_name: string,
-        patronymic: string,
-        department: {
-            id: number,
-            name: string
-        },
-        role: string
-    }
 
     const user:User = JSON.parse(localStorage.getItem('user') as string);
 
@@ -28,9 +26,9 @@ function CustomNavbar() {
 
     return(
     <nav className="navbar navbar-expand-lg navbar-light bg-light navbar_style">
-        <a className="navbar-brand" href="#">
+        <Link to="/" className="navbar-brand">
             <img className={"brand"} src={logo}/>
-        </a>
+        </Link>
         <div className="collapse navbar-collapse" id="navbarNav">
             {user.role === 'APPLICANT' &&
             <ul className="navbar-nav">

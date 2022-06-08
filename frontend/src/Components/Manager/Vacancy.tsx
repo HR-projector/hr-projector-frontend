@@ -2,19 +2,23 @@ import React, {useEffect, useState} from 'react';
 import '../Applicant/Resume.css'
 import VacancyCard from "./Cards/VacancyCard";
 
+export interface IVacancy {
+    id:number,
+    state:string,
+    creator_id: number,
+    creator_full_name: string,
+    position: string,
+    experience: number,
+    published_at: string,
+    department_name: string,
+    description: string,
+    department_id: number,
+    creator_contact: string
+}
+
 function Vacancy() {
 
-    const [state, setState] = useState({
-        vacancies:[{
-            id: 0,
-            state: "DRAFT",
-            creator_id: 0,
-            creator_full_name: "string",
-            position: "string",
-            experience: 0,
-            published_at: "2022-05-24T11:26:44.661Z"
-        }],
-    });
+    const [state, setState] = useState<IVacancy[]>([])
 
     useEffect(() => {
         getVacancies()
@@ -35,7 +39,7 @@ function Vacancy() {
         });
         response.json().then(
             res => {
-                setState({vacancies: res.result.items})}
+                setState(res.result.items)}
         )
     }
 
@@ -44,7 +48,7 @@ function Vacancy() {
             <a href="/vacancy/add_vacancy">
                 <button className="btn btn-success mt-3 add-btn" >Добавить Вакансию</button>
             </a>
-            {state.vacancies.map(vacancy => {
+            {state.map(vacancy => {
                 return (
                     <VacancyCard creator_full_name={vacancy.creator_full_name} experience={vacancy.experience}
                                  position={vacancy.position} state={vacancy.state} id={vacancy.id}/>

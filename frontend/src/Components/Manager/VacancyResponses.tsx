@@ -2,48 +2,19 @@ import React, {useEffect, useState} from 'react';
 import '../Applicant/Resume.css'
 import SearchResumeCard from "./Cards/SearchResumeCard";
 import VacancyCard from "./Cards/VacancyCard";
+import {IVacancy} from "./Vacancy";
+import {IResume} from "./ResumeSearch";
+
+export interface IResponse {
+    id: number,
+    vacancy: IVacancy,
+    resume: IResume,
+    applicant_message: string
+}
 
 function VacancyResponses() {
 
-    const [state, setState] = useState({
-        responses: [
-            {
-                id: 0,
-                vacancy: {
-                    id: 0,
-                    creator_id: 0,
-                    creator_full_name: "string",
-                    creator_contact: "string",
-                    department_id: 0,
-                    department_name: "string",
-                    position: "string",
-                    experience: 0,
-                    description: "string",
-                    published_at: "2022-06-07T18:19:01.068Z"
-                },
-                resume: {
-                    id: 0,
-                    applicant: {
-                        id: 0,
-                        email: "user@example.com",
-                        full_name: "string",
-                        department: {
-                            id: 0,
-                            name: "string"
-                        }
-                    },
-                    current_position: "string",
-                    desired_position: "string",
-                    skills: [
-                        "string"
-                    ],
-                    experience: 0,
-                    bio: "string"
-                },
-                applicant_message: "string"
-            }
-                  ]
-    });
+    const [state, setState] = useState<IResponse[]>([]);
 
     useEffect(() => {
         getResumesForManager()
@@ -64,7 +35,7 @@ function VacancyResponses() {
         });
         response.json().then(
             res => {
-                setState({responses: res.result.items})
+                setState(res.result.items)
                 console.log(res)
             }
         )
@@ -73,7 +44,7 @@ function VacancyResponses() {
 
     return (
         <div className={"general_background"}>
-            {state.responses.map(response => {
+            {state.map(response => {
                 return (
                     <div>
                         <p>Резюме соискателя</p>
