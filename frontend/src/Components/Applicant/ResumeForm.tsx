@@ -44,16 +44,14 @@ function ResumeForm() {
                         initialValues={{
                             current_position: "",
                             desired_position: "",
-                            skills: [
-                                "бекенд","фронтенд","аналитик"
-                            ],
+                            skills: '',
                             experience: 0,
                             bio: ""
                         }}
                         onSubmit={values => {
                             console.log(values);
                             addResume(values.current_position, values.desired_position,
-                                values.skills, values.experience, values.bio);
+                                values.skills.split(','), values.experience, values.bio);
                         }}
                     >
                         {() => (
@@ -61,7 +59,7 @@ function ResumeForm() {
                                 <h1 className="font-weight-bold title">Создание резюме</h1>
                                 <Form>
                                     <TextField label="Текущая позиция" name="current_position" type="text" />
-                                    <TextField label="Желаемая позиция" name="resumeText" type="text" />
+                                    <TextField label="Желаемая позиция" name="desired_position" type="text" />
                                     <TextField label="Рабочие навыки" name="skills" type="array" />
                                     <TextField label="Опыт (в годах)" name="experience" type="number" />
                                     <ResumeTextField label="Биография" name="bio" type="text" />

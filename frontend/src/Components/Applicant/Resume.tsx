@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import '../Applicant/Resume.css'
 import ResumeCard from "./Cards/Card";
 import {IResume} from "../Manager/ResumeSearch";
+import {Link} from "react-router-dom";
 
 function Resume() {
     const [state, setState] = useState<IResume[]>([]);
@@ -31,15 +32,15 @@ function Resume() {
 
     return(
         <div className={"general_background"}>
-            <a href="/resume/add_resume">
+            <Link to="add_resume">
                 <button className="btn btn-success mt-3 add-btn" >Добавить резюме</button>
-            </a>
+            </Link>
             {state.map(resume => {
                 return (
                     <ResumeCard current_position={resume.current_position} desired_position={resume.desired_position}
                                 skills={resume.skills} experience={resume.experience}
                                 bio={resume.bio} published_at={resume.published_at}
-                                id={resume.id} state={resume.state}/>
+                                id={resume.id} state={resume.state} created_at={resume.created_at}/>
                 )
             })}
         </div>

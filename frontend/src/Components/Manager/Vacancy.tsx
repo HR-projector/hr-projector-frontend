@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import '../Applicant/Resume.css'
 import VacancyCard from "./Cards/VacancyCard";
+import {Link} from "react-router-dom";
 
 export interface IVacancy {
     id:number,
@@ -45,9 +46,9 @@ function Vacancy() {
 
     return (
         <div className={"general_background"}>
-            <a href="/vacancy/add_vacancy">
+            <Link to="add_vacancy">
                 <button className="btn btn-success mt-3 add-btn" >Добавить Вакансию</button>
-            </a>
+            </Link>
             {state.map(vacancy => {
                 return (
                     <VacancyCard creator_full_name={vacancy.creator_full_name} experience={vacancy.experience}

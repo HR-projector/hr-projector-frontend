@@ -1,6 +1,6 @@
 import React from "react";
 import './Card.css';
-import ProstoModalka from "../ProstoModalka";
+import Modal from '../Modal'
 
 function SearchCard(props:any) {
 
@@ -19,10 +19,10 @@ function SearchCard(props:any) {
             <p>Требуется опыт разработки: {props.experience} (в годах)</p>
             <p>Позиция: {props.experience} (в годах)</p>
             <button type="button" className="btn btn-primary"
-                    data-bs-toggle="modal" data-bs-target="#prostoModalka">
+                    data-bs-toggle="modal" data-bs-target="#Modal">
                 Откликнуться на вакансию
             </button>
-            <ProstoModalka vacancy_id={props.vacancy_id}/>
+            <Modal vacancy_id={props.vacancy_id}/>
         </div>
     )
 }
