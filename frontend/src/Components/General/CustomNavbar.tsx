@@ -3,7 +3,7 @@ import logo from "../../Images/logo.png";
 import {Link} from 'react-router-dom'
 import './General.css'
 
-interface User {
+export interface IUser {
     id:number,
     email: string,
     first_name: string,
@@ -18,7 +18,7 @@ interface User {
 
 function CustomNavbar() {
 
-    const user:User = JSON.parse(localStorage.getItem('user') as string);
+    const user:IUser = JSON.parse(localStorage.getItem('user') as string);
 
     function get_role(role:string) {
         return role === 'APPLICANT' ? 'Соискатель' : 'Менеджер'
@@ -33,23 +33,23 @@ function CustomNavbar() {
             {user.role === 'APPLICANT' &&
             <ul className="navbar-nav">
                 <li className="nav-item active">
-                    <Link className="nav-link" to="/resume">Моё резюме</Link>
+                    <Link className="nav-link" to="resume">Моё резюме</Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to="/vacancy/search_vacancy">Поиск вакансий</Link>
+                    <Link className="nav-link" to="vacancy/search_vacancy">Поиск вакансий</Link>
                 </li>
             </ul>
             }
             {user.role === 'MANAGER' &&
             <ul className="navbar-nav">
                 <li className="nav-item">
-                    <Link className="nav-link" to="/vacancy">Мои вакансии</Link>
+                    <Link className="nav-link" to="vacancy">Мои вакансии</Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to="/resume/search_resume">Список резюме</Link>
+                    <Link className="nav-link" to="resume/search_resume">Список резюме</Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to="/vacancy/vacancy_responses">Список откликов на вакансии</Link>
+                    <Link className="nav-link" to="vacancy/vacancy_responses">Список откликов на вакансии</Link>
                 </li>
             </ul>
             }

@@ -17,15 +17,6 @@ function LoginForm() {
 
     const navigate = useNavigate();
 
-    function RouteTo(role:string) {
-        if (role === 'APPLICANT') {
-            navigate("/resume");
-        }
-        else {
-            navigate("/vacancy")
-        }
-    }
-
     async function login(email:string,password:string) {
         let body = {
             jsonrpc: "2.0",
@@ -77,7 +68,7 @@ function LoginForm() {
             }
             else {
                 localStorage.setItem("user",JSON.stringify(res.result));
-                RouteTo(res.result.role)
+                navigate('/app/home')
             }
         })
     }

@@ -46,7 +46,7 @@ function VacancyForm() {
         <div className="general_background">
             <div className={"resume_form"}>
                 <div className="container mt-3">
-                    <div >
+                    <div>
                         <Formik
                             initialValues={{
                                 position: '',

@@ -1,0 +1,10 @@
+.response-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: lightblue;
+    border-radius: 10px;
+}
+
+.response-text {
+    margin-left: 10px;
+}
