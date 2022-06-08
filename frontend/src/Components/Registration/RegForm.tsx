@@ -33,7 +33,7 @@ function RegForm() {
     const navigate = useNavigate();
 
     function RouteToLogin() {
-        navigate("/login");
+        navigate("/");
     }
 
     async function register(email:string,password:string,password_confirmation:string,
