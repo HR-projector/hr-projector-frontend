@@ -1,28 +1,10 @@
-import React, {useCallback, useEffect} from "react";
+import React from "react";
 import './ResumeForm.css';
 import {Form, Formik} from "formik";
-import * as Yup from "yup";
 import ResumeTextField from "./ResumeTextField";
 import TextField from "../Registration/TextField";
-import SelectField from "../General/SelectField";
 
 function ResumeForm() {
-
-    // const validate = Yup.object({
-    //     current_position: Yup.string()
-    //         .min(20, 'Минимум 20 символов')
-    //         .required('Необходимо указать вашу текущую позицию'),
-    //     desired_position: Yup.string()
-    //         .min(20, 'Минимум 20 символов')
-    //         .required('Необходимо указать вашу желаемую позицию'),
-    //     // skills: Yup.array()
-    //     //     .required('Необходимо указать ваши навыки'),
-    //     experience: Yup.number()
-    //         .required('Необходимо указать ваш стаж'),
-    //     bio: Yup.string()
-    //         .min(20, 'Минимум 20 символов')
-    //         .required('Необходимо указать вашу биографию'),
-    // })
 
     async function addResume(current_position:string, desired_position:string,
                              skills:string[], experience:number, bio:string)
@@ -68,7 +50,6 @@ function ResumeForm() {
                             experience: 0,
                             bio: ""
                         }}
-                        // validationSchema={validate}
                         onSubmit={values => {
                             console.log(values);
                             addResume(values.current_position, values.desired_position,
