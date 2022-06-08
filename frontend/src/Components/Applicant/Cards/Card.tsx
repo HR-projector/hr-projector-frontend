@@ -78,7 +78,7 @@ function Card(props:any) {
                 )
             })}
             <p className="resume-text">Опыт разработки: {props.experience} (год/лет)</p>
-            <p>Биографическая позиция:</p>
+            <p>Резюме:</p>
             <p className="resume-text">{props.bio}</p>
             {props.state === "PUBLISHED" &&
             <div>

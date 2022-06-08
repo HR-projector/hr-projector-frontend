@@ -1,6 +1,6 @@
 .general_background {
     background-color: #CAECF5;
-    height: 100vh;
+    min-height: 1080px;
     overflow: auto;
 }
 

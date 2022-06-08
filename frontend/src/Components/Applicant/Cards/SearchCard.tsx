@@ -17,7 +17,7 @@ function SearchCard(props:any) {
             <p>Заказчик: {props.creator_full_name}</p>
             <p>Департамент: {props.department_name}</p>
             <p>Требуется опыт разработки: {props.experience} (в годах)</p>
-            <p>Позиция: {props.experience} (в годах)</p>
+            <p>Позиция: {props.experience}</p>
             <button type="button" className="btn btn-primary"
                     data-bs-toggle="modal" data-bs-target="#Modal">
                 Откликнуться на вакансию
