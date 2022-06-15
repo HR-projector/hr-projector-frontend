@@ -52,9 +52,7 @@ function Card(props:any) {
     const navigate = useNavigate();
 
     function RouteToUpdate() {
-        navigate("update_resume");
-        localStorage.setItem("id", props.id);
-        localStorage.setItem("content",props.content)
+        navigate(`update_resume/?id=${props.id}&current_position=${props.current_position}&desired_position=${props.desired_position}&skills=${props.skills}&experience=${props.experience}&bio=${props.bio}`);
     }
 
     function addLeadZero(val:number) {
