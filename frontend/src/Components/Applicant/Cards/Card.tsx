@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './Card.css';
 import publish from "../../../Images/done.png";
 import update from "../../../Images/update.png";
@@ -6,6 +6,12 @@ import hide from "../../../Images/hide.png";
 import {useNavigate} from "react-router-dom"
 
 function Card(props:any) {
+
+    const [status,setStatus] = useState(props.state)
+
+    useEffect(() => {
+        setStatus(status)
+    }, [status]);
 
     async function publishResume() {
         let body = {
@@ -23,6 +29,7 @@ function Card(props:any) {
             body: JSON.stringify(body)
         });
         response.json().then(res => {
+            setStatus(res.result.state)
             console.log(res);
         })
 
@@ -44,6 +51,7 @@ function Card(props:any) {
             body: JSON.stringify(body)
         });
         response.json().then(res => {
+            setStatus(res.result.state)
             console.log(res);
         })
 
@@ -62,7 +70,7 @@ function Card(props:any) {
 
     return(
         <div className='card-resume'>
-            <p>Статус: {props.state === "DRAFT" ? 'Добавлено' : props.state === "PUBLISHED" ? 'Опубликовано' : 'Скрыто'}</p>
+            <p>Статус: {status === "DRAFT" ? 'Добавлено' : status === "PUBLISHED" ? 'Опубликовано' : 'Скрыто'}</p>
             <p>Создано: {addLeadZero(new Date(props.created_at).getDate())}-
                 {addLeadZero(new Date(props.created_at).getMonth()+1)}-
                 {addLeadZero(new Date(props.created_at).getFullYear())}</p>
@@ -78,7 +86,7 @@ function Card(props:any) {
             <p className="resume-text">Опыт разработки: {props.experience} (год/лет)</p>
             <p>Резюме:</p>
             <p className="resume-text">{props.bio}</p>
-            {props.state === "PUBLISHED" &&
+            {status === "PUBLISHED" &&
             <div>
                 <div className={"card-buttons"}>
                     <div onClick={hideResume}>
@@ -90,7 +98,7 @@ function Card(props:any) {
                 </div>
             </div>
             }
-            {(props.state === "DRAFT" || props.state === "HIDDEN") &&
+            {(status === "DRAFT" || status === "HIDDEN") &&
             <div className={"card-buttons"}>
                 <div onClick={publishResume}>
                     <img className={"resume-btn"} src={publish}/>
