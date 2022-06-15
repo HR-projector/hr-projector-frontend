@@ -3,8 +3,11 @@ import '../Applicant/ResumeForm.css'
 import {Form, Formik} from "formik";
 import * as Yup from "yup";
 import VacancyTextField from "./VacancyTextField";
+import {useSearchParams} from "react-router-dom";
 
 function VacancyUpdateForm() {
+
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const validate = Yup.object({
         position: Yup.string()
@@ -16,13 +19,13 @@ function VacancyUpdateForm() {
             .required('Необходимо заполнить резюме'),
     })
 
-    async function updateVacancy(position:string,experience:number,description:string) {
+    async function updateVacancy(id:number, position:string,experience:number,description:string) {
         let body = {
             jsonrpc: "2.0",
             id: 0,
             method: "update_vacancy",
             params: {
-                id: localStorage.getItem('id'),
+                id: id,
                 new_data: {
                     position: position,
                     experience: experience,
@@ -49,14 +52,15 @@ function VacancyUpdateForm() {
                     <div >
                         <Formik
                             initialValues={{
-                                position: '',
-                                experience: 0,
-                                description: ''
+                                id: Number(searchParams.get('id')!),
+                                position: searchParams.get("position")!,
+                                experience: Number(searchParams.get("experience")!),
+                                description: searchParams.get("description")!
                             }}
                             validationSchema={validate}
                             onSubmit={values => {
                                 console.log(values);
-                                updateVacancy(values.position,Number(values.experience),values.description);
+                                updateVacancy(values.id,values.position,Number(values.experience),values.description);
                             }}
                         >
                             {() => (

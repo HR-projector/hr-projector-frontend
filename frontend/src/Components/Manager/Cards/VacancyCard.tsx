@@ -52,9 +52,7 @@ function VacancyCard(props:any) {
     const navigate = useNavigate();
 
     function RouteToUpdate() {
-        navigate("/vacancy/update_vacancy");
-        localStorage.setItem("id", props.id);
-        localStorage.setItem("content",props.content)
+        navigate(`update_vacancy/?id=${props.id}&position=${props.position}&experience=${props.experience}`);
     }
 
     function addLeadZero(val:number) {
