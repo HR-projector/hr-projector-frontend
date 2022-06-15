@@ -32,7 +32,7 @@ function VacancyCard(props:any) {
         let body = {
             jsonrpc: "2.0",
             id: 0,
-            method: "hide_resume",
+            method: "hide_vacancy",
             params: {
                 id: props.id
             }
@@ -62,7 +62,8 @@ function VacancyCard(props:any) {
 
     return(
         <div className='card-resume'>
-            <p>Статус: {props.state === "DRAFT" ? 'Добавлено' : props.state === "PUBLISHED" ? 'Опубликовано' : 'Скрыто'}</p>
+            <p>Статус: {props.state === "DRAFT" ? 'Добавлено' : props.state === "PUBLISHED" ? 'Опубликовано' :
+                props.state === "HIDDEN" ? 'Скрыто' : 'Опубликовано'}</p>
             <p>Создатель: {props.creator_full_name}</p>
             <p>Позиция разработчика: {props.position}</p>
             <p>Необходимый опыт: {props.experience} (лет)</p>
@@ -74,7 +75,7 @@ function VacancyCard(props:any) {
                 </div>
             </div>
             }
-            {(props.state === "DRAFT" || props.state === "HIDDEN") &&
+            {(props.state === "DRAFT") &&
             <div className={"card-buttons"}>
                 <div onClick={publishVacancy}>
                     <img className={"resume-btn"} src={publish}/>

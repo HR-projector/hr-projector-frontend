@@ -1,49 +1,21 @@
 import React, {useEffect, useState} from 'react';
-import '../Applicant/Resume.css'
+import '../Applicant/Resume.css';
+import './VacancyResponses.css';
 import SearchResumeCard from "./Cards/SearchResumeCard";
 import VacancyCard from "./Cards/VacancyCard";
+import {IVacancy} from "./Vacancy";
+import {IResume} from "./ResumeSearch";
+
+export interface IResponse {
+    id: number,
+    vacancy: IVacancy,
+    resume: IResume,
+    applicant_message: string
+}
 
 function VacancyResponses() {
 
-    const [state, setState] = useState({
-        responses: [
-            {
-                id: 0,
-                vacancy: {
-                    id: 0,
-                    creator_id: 0,
-                    creator_full_name: "string",
-                    creator_contact: "string",
-                    department_id: 0,
-                    department_name: "string",
-                    position: "string",
-                    experience: 0,
-                    description: "string",
-                    published_at: "2022-06-07T18:19:01.068Z"
-                },
-                resume: {
-                    id: 0,
-                    applicant: {
-                        id: 0,
-                        email: "user@example.com",
-                        full_name: "string",
-                        department: {
-                            id: 0,
-                            name: "string"
-                        }
-                    },
-                    current_position: "string",
-                    desired_position: "string",
-                    skills: [
-                        "string"
-                    ],
-                    experience: 0,
-                    bio: "string"
-                },
-                applicant_message: "string"
-            }
-                  ]
-    });
+    const [state, setState] = useState<IResponse[]>([]);
 
     useEffect(() => {
         getResumesForManager()
@@ -64,7 +36,7 @@ function VacancyResponses() {
         });
         response.json().then(
             res => {
-                setState({responses: res.result.items})
+                setState(res.result.items)
                 console.log(res)
             }
         )
@@ -73,20 +45,21 @@ function VacancyResponses() {
 
     return (
         <div className={"general_background"}>
-            {state.responses.map(response => {
+            {state.map(response => {
+                console.log(response);
                 return (
-                    <div>
-                        <p>Резюме соискателя</p>
+                    <div className="response-container">
+                        <p className="response-text">Резюме соискателя:</p>
                         <SearchResumeCard applicant={response.resume.applicant} current_position={response.resume.current_position}
                                           desired_position={response.resume.desired_position} skills={response.resume.skills}
                                           experience={response.resume.experience} bio={response.resume.bio}
                         />
-                        <p>Вакансия работодателя</p>
+                        <p className="response-text">Вакансия работодателя:</p>
                         <VacancyCard creator_full_name={response.vacancy.creator_full_name} experience={response.vacancy.experience}
                                      position={response.vacancy.position}
                         />
                     </div>
-                )
+                );
             })}
         </div>
     )

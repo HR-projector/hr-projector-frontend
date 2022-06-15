@@ -1,23 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import '../Applicant/Resume.css'
 import ResumeCard from "./Cards/Card";
+import {IResume} from "../Manager/ResumeSearch";
+import {Link} from "react-router-dom";
 
 function Resume() {
-    const [state, setState] = useState({
-        resumes:[{
-            id: 0,
-            state: "DRAFT",
-            current_position: "string",
-            desired_position: "string",
-            skills: [
-                "string"
-            ],
-            experience: 0,
-            bio: "string",
-            created_at: "2022-06-07T17:23:06.981Z",
-            published_at: "2022-06-07T17:23:06.981Z"
-        }],
-    });
+    const [state, setState] = useState<IResume[]>([]);
 
     useEffect(() => {
         getResumes()
@@ -38,21 +26,21 @@ function Resume() {
         });
         response.json().then(
             res => {
-                setState({resumes: res.result})}
+                setState(res.result)}
         )
     }
 
     return(
         <div className={"general_background"}>
-            <a href="/resume/add_resume">
+            <Link to="add_resume">
                 <button className="btn btn-success mt-3 add-btn" >Добавить резюме</button>
-            </a>
-            {state.resumes.map(resume => {
+            </Link>
+            {state.map(resume => {
                 return (
                     <ResumeCard current_position={resume.current_position} desired_position={resume.desired_position}
                                 skills={resume.skills} experience={resume.experience}
                                 bio={resume.bio} published_at={resume.published_at}
-                                id={resume.id} state={resume.state}/>
+                                id={resume.id} state={resume.state} created_at={resume.created_at}/>
                 )
             })}
         </div>

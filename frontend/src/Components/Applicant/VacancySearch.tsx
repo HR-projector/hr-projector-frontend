@@ -1,21 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import '../Applicant/Resume.css'
 import SearchCard from "./Cards/SearchCard";
+import {IVacancy} from "../Manager/Vacancy";
 
 function VacancySearch() {
 
-    const [state, setState] = useState({
-        vacancies:[{
-            id: 0,
-            creator_id: 0,
-            creator_full_name: "string",
-            department_id: 0,
-            department_name: "string",
-            position: "string",
-            experience: 0,
-            published_at: "2022-05-30T19:43:55.427Z"
-        }]
-    });
+    const [state, setState] = useState<IVacancy[]>([]);
 
     useEffect(() => {
         getVacanciesForApplicant()
@@ -36,13 +26,13 @@ function VacancySearch() {
         });
         response.json().then(
             res => {
-                setState({vacancies: res.result.items})}
+                setState( res.result.items)}
         )
     }
 
     return (
         <div className={"general_background"}>
-            {state.vacancies.map(vacancy => {
+            {state.map(vacancy => {
                 return (
                     <SearchCard creator_full_name={vacancy.creator_full_name} experience={vacancy.experience}
                                  position={vacancy.position}  department_name={vacancy.department_name}
