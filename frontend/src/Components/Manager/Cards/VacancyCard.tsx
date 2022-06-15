@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import '../../Applicant/Cards/Card.css';
 import publish from "../../../Images/done.png";
 import update from "../../../Images/update.png";
@@ -6,6 +6,12 @@ import hide from "../../../Images/hide.png";
 import {useNavigate} from "react-router-dom"
 
 function VacancyCard(props:any) {
+
+    const [status,setStatus] = useState(props.state)
+
+    useEffect(() => {
+        setStatus(status)
+    }, [status]);
 
     async function publishVacancy() {
         let body = {
@@ -23,6 +29,7 @@ function VacancyCard(props:any) {
             body: JSON.stringify(body)
         });
         response.json().then(res => {
+            setStatus(res.result.state)
             console.log(res);
         })
 
@@ -44,6 +51,7 @@ function VacancyCard(props:any) {
             body: JSON.stringify(body)
         });
         response.json().then(res => {
+            setStatus(res.result.state)
             console.log(res);
         })
 
@@ -64,20 +72,20 @@ function VacancyCard(props:any) {
 
     return(
         <div className='card-resume'>
-            <p>Статус: {props.state === "DRAFT" ? 'Добавлено' : props.state === "PUBLISHED" ? 'Опубликовано' :
-                props.state === "HIDDEN" ? 'Скрыто' : 'Опубликовано'}</p>
+            <p>Статус: {status === "DRAFT" ? 'Добавлено' : status === "PUBLISHED" ? 'Опубликовано' :
+                status === "HIDDEN" ? 'Скрыто' : 'Опубликовано'}</p>
             <p>Создатель: {props.creator_full_name}</p>
             <p>Позиция разработчика: {props.position}</p>
             <p>Необходимый опыт: {props.experience} (лет)</p>
             <p className="resume-text">{props.content}</p>
-            {props.state === "PUBLISHED" &&
+            {status === "PUBLISHED" &&
             <div className={"card-buttons"}>
                 <div onClick={hideVacancy}>
                     <img className={"resume-btn"} src={hide}/>
                 </div>
             </div>
             }
-            {(props.state === "DRAFT") &&
+            {status === "DRAFT" &&
             <div className={"card-buttons"}>
                 <div onClick={publishVacancy}>
                     <img className={"resume-btn"} src={publish}/>
@@ -90,5 +98,6 @@ function VacancyCard(props:any) {
         </div>
     )
 }
+
 
 export default VacancyCard
