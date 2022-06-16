@@ -40,6 +40,7 @@ function DepartmentOption({ label, ...props}:any){
         <div className="mb-2">
             <label htmlFor={field.name}>{label}</label>
             <Field class="form-select" name="departmentOption" as="select">
+                <option value='0'>Выберите департамент</option>
                 {state.departments.map(department => {
                     return (
                         <option value={department.id}>{department.name}</option>

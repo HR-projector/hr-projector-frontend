@@ -54,6 +54,8 @@ function VacancyResponses() {
                                           desired_position={response.resume.desired_position} skills={response.resume.skills}
                                           experience={response.resume.experience} bio={response.resume.bio}
                         />
+                        <h3 className="response-text">Прикрепленное сообщение: </h3>
+                        <p className="applicant-message response-text">{response.applicant_message}</p>
                         <p className="response-text">Вакансия работодателя:</p>
                         <VacancyCard creator_full_name={response.vacancy.creator_full_name} experience={response.vacancy.experience}
                                      position={response.vacancy.position}
